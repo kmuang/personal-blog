@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter - Khup Muang</title> 
+    <link rel="shortcut icon" href="img/logo.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="avatar">
+                <a href="index.html">
+                    <img src="img/logo.jpeg" alt="KM">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="newsletter.html" class="active">Newsletter</a></li>
+                </ul>
+            </nav>
+          
+        </header>
+
+        <main class="newsletter-content">
+            <div class="newsletter-header">
+                <h1>Subscribe to the Newsletter 📩</h1>
+                <p>
+                    Get the latest articles, coding tips, and behind-the-scenes insights delivered straight to your
+                    inbox.
+                    No spam, just quality content.
+                </p>
+            </div>
+
+            <form class="newsletter-form"
+                onsubmit="event.preventDefault(); alert('Thanks for subscribing! (This is a demo)');">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p class="spam-notice">Unsubscribe at any time.</p>
+
+<section class="newsletter-benefits">
+                <h2>Why Subscribe?</h2>
+                <ul class="benefits-list">
+                    <li>
+                        <span class="icon">🚀</span>
+                        <div class="benefit-text">
+                            <strong>Early Access</strong>
+                            <p>Be the first to read new tutorials and guides before they go live on the blog.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">💡</span>
+                        <div class="benefit-text">
+                            <strong>Exclusive Tips</strong>
+                            <p>I share quick coding snippets and resource recommendations that don't make it into full
+                                articles.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🧗‍♀️</span>
+                        <div class="benefit-text">
+                            <strong>Personal Updates</strong>
+                            <p>Hear more about my journey, including the ups and downs of learning to code.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <div class="copyright">
+                Made with ❤️ and ☕
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fas fa-rss"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
