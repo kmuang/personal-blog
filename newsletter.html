@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter - Khup Muang</title>
+  <meta name="description" content="Subscribe to Khup Muang's newsletter for updates on front-end development, coding tutorials, and learning resources.">
+  <link rel="shortcut icon" href="img/logo.jpeg" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="theme.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar">
+        <a href="index.html">
+          <img src="img/logo.jpeg" alt="Khup Muang">
+        </a>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="newsletter.html" class="active">Newsletter</a></li>
+        </ul>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main class="newsletter-content">
+      <div class="newsletter-header">
+        <h1>Subscribe to the Newsletter 📩</h1>
+        <p>
+          Get the latest articles, coding tips, and behind-the-scenes insights delivered straight to your
+          inbox. No spam, ever—just genuine, quality content.
+        </p>
+      </div>
+
+      <!-- Formspree Integration: Replace YOUR_FORM_ID with your Formspree Form ID -->
+      <form class="newsletter-form" id="newsletter-form" action="https://formspree.io/f/xpppwvdw" method="POST">
+        <label for="newsletter-email" class="sr-only">Email address</label>
+        <input type="email" id="newsletter-email" name="email" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit" id="newsletter-submit">Subscribe</button>
+      </form>
+      <div id="newsletter-status" class="form-status" role="status" aria-live="polite"></div>
+      <p class="spam-notice"><i class="fas fa-lock"></i> Free forever. Unsubscribe at any time with one click.</p>
+
+      <section class="newsletter-benefits">
+        <h2>Why Subscribe?</h2>
+        <ul class="benefits-list">
+          <li>
+            <span class="icon">🚀</span>
+            <div class="benefit-text">
+              <strong>Early Access</strong>
+              <p>Be the first to read new tutorials, cheat sheets, and guides before they go live on the blog.</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">💡</span>
+            <div class="benefit-text">
+              <strong>Curated Coding Insights</strong>
+              <p>Quick coding snippets, productivity hacks, and modern CSS/JS techniques that don't make it into full articles.</p>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🧗</span>
+            <div class="benefit-text">
+              <strong>Personal Learning Journey</strong>
+              <p>Honest behind-the-scenes updates about learning in public, building side projects, and staying motivated.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div class="copyright">
+        Made with ❤️ and ☕
+      </div>
+      <div class="footer-social">
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter profile">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="#" aria-label="RSS Feed">
+          <i class="fas fa-rss"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('newsletter-form');
+    const statusDiv = document.getElementById('newsletter-status');
+    const submitBtn = document.getElementById('newsletter-submit');
+
+    form.addEventListener('submit', async function (e) {
+      // If user hasn't replaced YOUR_FORM_ID yet, prompt them gently
+      if (form.action.includes('YOUR_FORM_ID')) {
+        e.preventDefault();
+        statusDiv.className = 'form-status error';
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please replace <code>YOUR_FORM_ID</code> in newsletter.html with your Formspree Form ID.';
+        return;
+      }
+
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Subscribing...';
+      statusDiv.className = 'form-status';
+      statusDiv.textContent = '';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          statusDiv.className = 'form-status success';
+          statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> Thanks for subscribing! You are on the list.';
+          form.reset();
+        } else {
+          const data = await response.json();
+          statusDiv.className = 'form-status error';
+          if (data && data.errors) {
+            statusDiv.textContent = data.errors.map(err => err.message).join(', ');
+          } else {
+            statusDiv.textContent = 'Oops! There was a problem submitting your subscription.';
+          }
+        }
+      } catch (err) {
+        statusDiv.className = 'form-status error';
+        statusDiv.textContent = 'Network error. Please try again later.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Subscribe';
+      }
+    });
+  </script>
+</body>
+
+</html>
